@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAU Geoscience & Climate Data with AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-ocean: #1a3a5c;
+            --ocean-teal: #2d8a8a;
+            --warm-earth: #c4956a;
+            --cloud-white: #f5f5f5;
+            --sky-blue: #4a9ece;
+            --sunset: #e07850;
+            --forest: #3a7a5c;
+            --slate: #4a5568;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #2d3748;
+            background: var(--cloud-white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-family: 'Source Serif 4', serif; }
+
+        .header {
+            background: linear-gradient(135deg, var(--deep-ocean), var(--ocean-teal));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .header .collab {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .header .collab a {
+            color: #a8d8ea;
+            text-decoration: none;
+        }
+
+        .header .collab a:hover { text-decoration: underline; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            color: var(--deep-ocean);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Notebook Cards */
+        .notebook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid var(--ocean-teal);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .card .number {
+            display: inline-block;
+            background: var(--ocean-teal);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            color: var(--deep-ocean);
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.92rem;
+            color: var(--slate);
+            margin-bottom: 1rem;
+        }
+
+        .card .btn {
+            display: inline-block;
+            background: var(--ocean-teal);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .card .btn:hover { background: var(--deep-ocean); }
+
+        .card:nth-child(2) { border-left-color: var(--sky-blue); }
+        .card:nth-child(2) .number { background: var(--sky-blue); }
+        .card:nth-child(3) { border-left-color: var(--forest); }
+        .card:nth-child(3) .number { background: var(--forest); }
+        .card:nth-child(4) { border-left-color: var(--sunset); }
+        .card:nth-child(4) .number { background: var(--sunset); }
+        .card:nth-child(5) { border-left-color: var(--warm-earth); }
+        .card:nth-child(5) .number { background: var(--warm-earth); }
+        .card:nth-child(6) { border-left-color: var(--deep-ocean); }
+        .card:nth-child(6) .number { background: var(--deep-ocean); }
+
+        /* Getting Started */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step .step-num {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--deep-ocean);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 48px;
+            margin-bottom: 0.75rem;
+            font-family: 'Source Serif 4', serif;
+        }
+
+        .step h3 { font-size: 1.1rem; color: var(--deep-ocean); margin-bottom: 0.4rem; }
+        .step p { font-size: 0.92rem; color: var(--slate); }
+
+        /* Dataset Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        th {
+            background: var(--deep-ocean);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid #e8ecf0;
+            font-size: 0.9rem;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f0f7fa; }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-ocean);
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .footer a { color: #a8d8ea; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .header h1 { font-size: 1.8rem; }
+            .notebook-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>FAU Geoscience & Climate Data with AI</h1>
+    <p>Learn Python, climate analysis, and machine learning through real NOAA weather data. No programming experience needed.</p>
+    <div class="collab">
+        A collaboration between <strong>William Hahn</strong> (Mathematics & Statistics)
+        and <strong><a href="https://www.geosciences.fau.edu/people/ejohanson.php">Erik Johanson</a></strong> (Geosciences)
+        at Florida Atlantic University
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="section">
+        <h2>Notebooks</h2>
+        <div class="notebook-grid">
+
+            <div class="card">
+                <span class="number">0</span>
+                <h3>Python Basics</h3>
+                <p>Variables, lists, loops, and functions using weather stations as your context. Start here if you've never programmed before.</p>
+                <a class="btn" href="https://colab.research.google.com/github/wjhahn/fau-geo/blob/main/Notebook_0_Python_Basics.ipynb" target="_blank">Open in Colab</a>
+            </div>
+
+            <div class="card">
+                <span class="number">1</span>
+                <h3>Climate as Data</h3>
+                <p>Fetch real temperature data from NOAA, visualize daily time series, heatmaps, trends, and anomalies.</p>
+                <a class="btn" href="https://colab.research.google.com/github/wjhahn/fau-geo/blob/main/Notebook_1_Climate_as_Data.ipynb" target="_blank">Open in Colab</a>
+            </div>
+
+            <div class="card">
+                <span class="number">2</span>
+                <h3>Climate Explorer</h3>
+                <p>Compare 5 US cities with heatmap montages, seasonal profiles, and a mystery station identification challenge.</p>
+                <a class="btn" href="https://colab.research.google.com/github/wjhahn/fau-geo/blob/main/Notebook_2_Climate_Explorer.ipynb" target="_blank">Open in Colab</a>
+            </div>
+
+            <div class="card">
+                <span class="number">3</span>
+                <h3>Clustering with ML</h3>
+                <p>Extract climate fingerprints, train a PyTorch autoencoder, and watch 20 US stations cluster by climate type.</p>
+                <a class="btn" href="https://colab.research.google.com/github/wjhahn/fau-geo/blob/main/Notebook_3_Clustering.ipynb" target="_blank">Open in Colab</a>
+            </div>
+
+            <div class="card">
+                <span class="number">4</span>
+                <h3>Satellite & Reanalysis</h3>
+                <p>Explore GOES-19 satellite imagery, NCEP/NCAR gridded data, and animated cartopy maps of the US.</p>
+                <a class="btn" href="https://colab.research.google.com/github/wjhahn/fau-geo/blob/main/Notebook_4_Satellite_and_Reanalysis.ipynb" target="_blank">Open in Colab</a>
+            </div>
+
+            <div class="card">
+                <span class="number">5</span>
+                <h3>Your Own Data</h3>
+                <p>Choose any US weather station, run the full analysis pipeline, and see where it clusters. Your capstone project.</p>
+                <a class="btn" href="https://colab.research.google.com/github/wjhahn/fau-geo/blob/main/Notebook_5_Your_Own_Data.ipynb" target="_blank">Open in Colab</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Getting Started</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Click a Notebook</h3>
+                <p>Choose any notebook above. Start with Notebook 0 if you're new to Python.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Open in Colab</h3>
+                <p>Runs in your browser — no software to install. Just sign in with Google.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Run & Explore</h3>
+                <p>Execute cells top to bottom. Experiment with the code. Make it your own.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Station Dataset</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Station ID</th>
+                    <th>Climate Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Miami, FL</td><td>USW00012839</td><td>Tropical</td></tr>
+                <tr><td>New York, NY</td><td>USW00094728</td><td>Humid Continental</td></tr>
+                <tr><td>Chicago, IL</td><td>USW00094846</td><td>Continental</td></tr>
+                <tr><td>Los Angeles, CA</td><td>USW00023174</td><td>Mediterranean</td></tr>
+                <tr><td>Seattle, WA</td><td>USW00024233</td><td>Marine</td></tr>
+            </tbody>
+        </table>
+        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: #718096;">
+            Notebook 3 expands to 20 stations across all major US climate zones.
+        </p>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>
+        <strong>Florida Atlantic University</strong><br>
+        <a href="https://www.geosciences.fau.edu/people/ejohanson.php">Erik Johanson</a> (Geosciences)
+        &middot;
+        William Hahn (Mathematics & Statistics)
+    </p>
+    <p style="margin-top: 0.75rem; font-size: 0.82rem; opacity: 0.7;">
+        Data sourced from NOAA NCEI, NOAA NESDIS, and NOAA PSL.
+    </p>
+</div>
+
+</body>
+</html>
