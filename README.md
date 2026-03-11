@@ -2,7 +2,7 @@
 
 An educational data science curriculum that teaches **Python, climate analysis, and machine learning** through real NOAA weather data. Designed for students with no programming experience.
 
-A collaboration between **William Hahn** (Mathematics & Statistics) and **[Erik Johanson](https://www.geosciences.fau.edu/people/ejohanson.php)** (Geosciences) at Florida Atlantic University.
+A collaboration between **[Erik Johanson](https://www.geosciences.fau.edu/people/ejohanson.php)** (Geosciences) and **[William Hahn](https://mpcrlab.com/)** (Mathematics & Statistics) at Florida Atlantic University.
 
 ---
 
@@ -76,8 +76,8 @@ All installed automatically in Colab:
 
 ## Collaborators
 
-- **William Hahn** — Department of Mathematics & Statistics, FAU
 - **Erik Johanson** — Department of Geosciences, FAU
+- **[William Hahn](https://mpcrlab.com/)** — Department of Mathematics & Statistics, FAU
 
 ---
 
